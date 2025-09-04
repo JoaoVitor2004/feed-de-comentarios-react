@@ -1,0 +1,92 @@
+/* Estilizando o Aplicativo  */
+
+.logo {
+  position: fixed;
+  top: 50px;
+  right: 100px;
+  width: 60px;
+  max-width: 100%;
+}
+
+.app {
+  display: grid;
+  place-items: center;
+  place-content: center;
+  width: 100%;
+  min-height: 100vh;
+  padding-top: 40px;
+}
+
+.app .container {
+  width: 600px;
+  max-width: 90%;
+  margin: 0 auto;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.container .title {
+  width: 100%;
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 40px;
+}
+
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+input[type="email"] {
+  border-radius: 25px;
+  padding: 10px 40px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.200);
+  font-size: 18px;
+}
+
+textarea {
+  min-height: 250px;
+  padding: 20px;
+  margin-bottom: 10px;
+  font-size: 18px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  outline: none;
+  border-radius: 10px;
+}
+
+.btn {
+  width: 150px;
+  margin: 20px auto;
+  background-color: #000;
+  color: #fff;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 25px;
+}
+
+.container .info {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 30px 0 40px 0;
+}
+
+.comentario {
+  background-color: lightgoldenrodyellow;
+  padding: 12px 40px;
+  border-radius: 55px;
+  margin-bottom: 30px;
+}
+
+@media (width < 542px) {
+  .app .container {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .container .title {
+    font-size: 26px;
+  }
+}
