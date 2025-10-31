@@ -1,10 +1,16 @@
-import { useState } from "react"
+import { useState, useContext, useRef } from "react"
+import counterContext from "./contexts/Counter/counterContext";
 import Toastify from "toastify-js"
 import styles from "./styles/App.module.css"
 import "./styles/Modal.css";
 import Logo from "./assets/images/react.svg"
 
 export default function App() {
+
+  const { count, incrementar } = useContext(counterContext)
+  const btnRef = useRef()
+
+  btnRef.current.addEventListener("click", incrementar)
 
   const [feed, setFeed] = useState([])
   const [hide, setHide] = useState("hide")
@@ -95,6 +101,10 @@ export default function App() {
           }
         </div>
       </main>
+      <div>
+        <h2>{count}</h2>
+        <button ref={btnRef}>Adicionar</button>
+      </div>
     </>
   )
 }
