@@ -7,7 +7,6 @@ import Logo from "./assets/images/react.svg"
 
 export default function App() {
 
-  const { count, incrementar } = useContext(counterContext)
   const btnRef = useRef()
 
   btnRef.current.addEventListener("click", incrementar)
@@ -17,6 +16,8 @@ export default function App() {
   const [messageError, setMessageError] = useState("")
   const [email, setEmail] = useState("")
   const [coment, setComent] = useState("")
+
+  const { count, incrementar } = useContext(counterContext)
 
   const showAndHideModal = () => {
     setHide((prev) => prev === "hide" ? "" : "hide")
@@ -99,6 +100,10 @@ export default function App() {
               </div>
             ))
           }
+        </div>
+        <div>
+          <h2>{count}</h2>
+          <button onClick={incrementar}>Adicionar</button>
         </div>
       </main>
       <div>
