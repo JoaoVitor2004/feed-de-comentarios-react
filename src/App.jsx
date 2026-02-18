@@ -1,5 +1,4 @@
-import { useState, useContext, useRef } from "react"
-import counterContext from "./contexts/Counter/counterContext";
+import { useState } from "react"
 import Toastify from "toastify-js"
 import styles from "./styles/App.module.css"
 import "./styles/Modal.css";
@@ -7,27 +6,23 @@ import Logo from "./assets/images/react.svg"
 
 export default function App() {
 
-  const btnRef = useRef()
-
-  btnRef.current.addEventListener("click", incrementar)
-
   const [feed, setFeed] = useState([])
   const [hide, setHide] = useState("hide")
   const [messageError, setMessageError] = useState("")
   const [email, setEmail] = useState("")
   const [coment, setComent] = useState("")
 
-  const { count, incrementar } = useContext(counterContext)
-
   const showAndHideModal = () => {
     setHide((prev) => prev === "hide" ? "" : "hide")
   }
 
-  const submitFormComent = () => {
+  const submitFormComent = (event) => {
 
-    const verify = email.match(/^[a-zA-Z-_]+@+[a-zA-Z]+\.+[a-z]{1,3}/)
+    event.preventDefault()
 
-    if (!verify) {
+    if (
+      !email.match(/^[a-zA-Z0-9-_]+@+[a-zA-Z]+\.+[a-z]{1,3}/)
+    ) {
       showAndHideModal()
       setMessageError("Email invalido!")
       return
@@ -39,24 +34,25 @@ export default function App() {
       return
     }
 
+    event.currentTarget.reset()
+
     Toastify({
       text: "Comentario enviado com sucesso!",
       duration: 3000,
       close: true,
-      gravity: "top", // `top` or `bottom`
-      position: "right", // `left`, `center` or `right`
-      stopOnFocus: true, // Prevents dismissing of toast on hover
+      gravity: "top",
+      position: "right",
+      stopOnFocus: true,
       style: {
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        padding: "20px",
         width: "600px",
         maxWidth: "90%",
         background: "#2c2c2c",
         color: "#fff"
       },
-      onClick: function () { } // Callback after click
+      onClick: function () { }
     }).showToast();
 
     const obj = {
@@ -79,10 +75,7 @@ export default function App() {
         <img className={styles.logo} src={Logo} alt="Logo react" />
         <div className={styles.container}>
           <h1 className={styles.title}>Feed de comentarios</h1>
-          <form action="#" onSubmit={(event) => {
-            event.preventDefault()
-            submitFormComent()
-          }}>
+          <form action="#" onSubmit={submitFormComent}>
 
             <input type="email" id="email" onChange={(prev) => setEmail(prev.target.value)} placeholder="Digite seu melhor email" />
 
@@ -101,15 +94,7 @@ export default function App() {
             ))
           }
         </div>
-        <div>
-          <h2>{count}</h2>
-          <button onClick={incrementar}>Adicionar</button>
-        </div>
       </main>
-      <div>
-        <h2>{count}</h2>
-        <button ref={btnRef}>Adicionar</button>
-      </div>
     </>
   )
 }
